@@ -6,11 +6,11 @@ from matplotlib import pyplot as plt
 path = os.getcwd()
 print(path)
 # ---------- Calculation ----------------
-with open('/Users/audrius/Documents/DataScience/ml-regression/data/cars.csv', 'r') as f:
-    reader = csv.reader(f)
-    data = list(reader)
-cars_array = np.array(data)
-data = np.genfromtxt('/Users/audrius/Documents/DataScience/ml-regression/data/cars.csv', delimiter=',')
+# with open('/Users/audrius/Documents/VCSPython/ml-regression/data/cars.csv', 'r') as f:
+#     reader = csv.reader(f)
+#     data = list(reader)
+# cars_array = np.array(data)
+data = np.genfromtxt('/Users/audrius/Documents/VCSPython/ml-regression/data/cars.csv', delimiter=',')
 X = data[1:, 1].astype(int)
 Y = data[1:, 3].astype(int)
 X_mean = np.mean(X)
