@@ -10,6 +10,7 @@ from sklearn.preprocessing import StandardScaler
 # Get data
 df = pd.read_csv('/Users/audrius/Documents/VCSPython/ml-regression/data/cars.csv')
 print(df.info())
+print(df.head())
 
 # Add target
 df['going_to_sel'] = np.where(df['owner'] == 'First Owner', 0, 1)
