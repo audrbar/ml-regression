@@ -31,5 +31,5 @@ print(cm)
 print(accuracy)
 
 plt.figure(figsize=(10, 10))
-tree.plot_tree(model, feature_names=X.columns, class_names=['F', 'P'])
+tree.plot_tree(model, feature_names=X.columns, class_names=df.target_names)
 plt.show()
