@@ -1,5 +1,5 @@
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, f1_score
 from sklearn import tree
 import pandas as pd
 import os
@@ -35,16 +35,21 @@ print("Y", y[:5])
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train Decision Tree Classifier. Default criterion 'gini', next one 'entropy'
-model = DecisionTreeClassifier(criterion='gini', max_depth=3, random_state=42)
+model = DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=42)
 model.fit(X_train, y_train)
 
 y_predict = model.predict(X_test)
 
-cm = confusion_matrix(y_test, y_predict)
+confusion = confusion_matrix(y_test, y_predict)
 accuracy = accuracy_score(y_test, y_predict)
-
-print("Confusion_matrix: \n", cm)
-print("Accuracy: \n", accuracy)
+precision = precision_score(y_test, y_predict, average='macro')
+recall = recall_score(y_test, y_predict, average='macro')
+f1 = f1_score(y_test, y_predict, average='macro')
+print(f"Confusion Matrix: \n{confusion}")
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
 
 plt.figure(figsize=(12, 8))
 tree.plot_tree(model, feature_names=X.columns, class_names=['No Diabetes', 'Diabetes'], filled=True)

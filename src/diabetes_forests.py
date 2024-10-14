@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, f1_score, recall_score
 
 path = os.getcwd()
 print(path)
@@ -36,11 +36,16 @@ rf.fit(X_train, y_train)
 y_predict = rf.predict(X_test)
 
 # Evaluate model
-accuracy = accuracy_score(y_test, y_predict)
 confusion = confusion_matrix(y_test, y_predict)
-
-print(f"Accuracy: \n{accuracy}")
+accuracy = accuracy_score(y_test, y_predict)
+precision = precision_score(y_test, y_predict, average='macro')
+recall = recall_score(y_test, y_predict, average='macro')
+f1 = f1_score(y_test, y_predict, average='macro')
 print(f"Confusion Matrix: \n{confusion}")
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
 print(f"Feature Importance's: \n{X.columns} \n{rf.feature_importances_}")
 
 # Plot results

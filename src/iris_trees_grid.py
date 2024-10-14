@@ -1,7 +1,7 @@
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, f1_score
 
 # Load the iris dataset
 iris = load_iris()
@@ -32,10 +32,15 @@ print("Best parameters found: ", grid_search.best_params_)
 
 # Evaluate the best model on the test set
 best_rf = grid_search.best_estimator_
-y_pred = best_rf.predict(X_test)
+y_predict = best_rf.predict(X_test)
 
-cm = confusion_matrix(y_test, y_pred)
-accuracy = accuracy_score(y_test, y_pred)
-
-print(cm)
-print(accuracy)
+confusion = confusion_matrix(y_test, y_predict)
+accuracy = accuracy_score(y_test, y_predict)
+precision = precision_score(y_test, y_predict, average='macro')
+recall = recall_score(y_test, y_predict, average='macro')
+f1 = f1_score(y_test, y_predict, average='macro')
+print(f"Confusion Matrix: \n{confusion}")
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
